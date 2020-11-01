@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite1" verbose="1" parallel="classes" thread-count="4">
+
+    <test name="Regression1">
+        <classes>
+            <class name="io.github.greencity.l3.tests.GreenCityTestEmail"/>
+            <class name="io.github.greencity.l3.tests.GreenCityTestUserName"/>
+        </classes>
+
+    </test>
+</suite>
