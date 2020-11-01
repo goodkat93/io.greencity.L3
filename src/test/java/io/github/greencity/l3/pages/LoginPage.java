@@ -1,5 +1,6 @@
 package io.github.greencity.l3.pages;
 
+import io.github.greencity.l3.helpers.StableElementSearch;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Action;
@@ -9,25 +10,18 @@ import sun.rmi.runtime.Log;
 
 import java.util.concurrent.TimeUnit;
 
-public class LoginPage {
+public class LoginPage implements StableElementSearch {
+
+
 
     WebDriver driver;
     public LoginPage(WebDriver driver) { this.driver = driver; }
 
-    public LoginPage open(){
-        driver.get("https://ita-social-projects.github.io/GreenCityClient");
-        driver.manage().window().maximize();
-        return this;
-    }
-    public LoginPage clickSignUp(){
-        driver.findElement(By.cssSelector("li.sign-up-link span"))
-                .click();
-        return this;
-    }
+
+
     public LoginPage setEmail(String email) {
-        driver.findElement(By.xpath("//input[@formcontrolname='email']"))
-                .sendKeys(email);
-        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+
+        searchElementByXpath("//input[@formcontrolname='email']").sendKeys(email);
         return this;
     }
     public LoginPage testEmail() {
@@ -52,4 +46,8 @@ public class LoginPage {
     }
 
 
+    @Override
+    public WebDriver setDriver() {
+        return this.driver;
+    }
 }

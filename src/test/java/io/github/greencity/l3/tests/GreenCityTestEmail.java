@@ -19,7 +19,7 @@ public class GreenCityTestEmail extends Runner {
         };
     }
 
-    @Test(dataProvider = "emailDataProvider")
+/*    @Test(dataProvider = "emailDataProvider")
     public void verifyData1(String email, String errMsg) {
         new LoginPage(driver)
                 .open()
@@ -36,5 +36,5 @@ public class GreenCityTestEmail extends Runner {
         new LoginPage(driver)
                 .open()
                 .clickSignUp();
-    }
+    }*/
 }
