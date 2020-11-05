@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 public class LoginPage implements StableElementSearch {
 
-
+    By signInButton = By.cssSelector("li.sign-up-link>div.create-button>span");
 
     WebDriver driver;
     public LoginPage(WebDriver driver) { this.driver = driver; }
@@ -25,26 +25,25 @@ public class LoginPage implements StableElementSearch {
         return this;
     }
     public LoginPage testEmail() {
-        driver.findElements(By.cssSelector("div.error-message>app-error>div"));
+        searchElementByCss("div.error-message>app-error>div");
         String pageSource = driver.getPageSource();
         Assert.assertFalse(pageSource.contains("error-message ng-star-inserted"));
-        driver.findElement(By.xpath("//input[@formcontrolname='email']")).clear();
+        searchElementByXpath("//input[@formcontrolname='email']").clear();
         return this;
     }
 
-    public LoginPage clickAgain() {
-        driver.findElement(By.cssSelector("li.sign-up-link span"))
+    public LoginPage clickSignUp(){
+        driver.findElement(signInButton)
                 .click();
-        return this;
+        return new LoginPage(driver);
     }
 
     public LoginPage setUserName(String UserName) {
-        driver.findElement(By.xpath("//input[@formcontrolname='firstName']"))
+        searchElementByXpath("//input[@formcontrolname='firstName']")
                 .sendKeys(UserName);
-        driver.findElement(By.xpath("//input[@formcontrolname='email']")).click();
+        searchElementByXpath("//input[@formcontrolname='email']").click();
         return this;
     }
-
 
     @Override
     public WebDriver setDriver() {
