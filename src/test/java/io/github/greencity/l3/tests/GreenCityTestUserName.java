@@ -14,7 +14,7 @@ import java.util.List;
 
 public class GreenCityTestUserName extends Runner{
 
-    @Test(groups = {"SmokeSingUp"},dataProvider = "usernameDataProvider",dataProviderClass = StaticDataProvider.class )
+/*    @Test(groups = {"SmokeSingUp"},dataProvider = "usernameDataProvider",dataProviderClass = StaticDataProvider.class )
     public void TestUsername(String username, String errorMsg) {
         new MainPage(driver)
                 .open()
@@ -45,9 +45,31 @@ public class GreenCityTestUserName extends Runner{
                 .clickTipsButton()
                 .clickPlacesButton()
                 .clickAboutUsButton();
+        }
+*/
 
+
+    @Test
+    public void testItems() throws Exception {
+        new MainPage(driver)
+                .open()
+                .clickNewsButton()
+                .toggleButtonAds()
+                .toggleButtonEvents()
+                .toggleButtonNews()
+                .toggleButtonEducation()
+                .toggleButtonIniatives()
+                .toggleButtonLifehacks()
+                .toggleButtonHomepage()
+                .clickNewsButton()
+                .findItems()
+                .findUserData();
 
     }
+
+
+
+
 }
 
     

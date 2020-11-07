@@ -21,6 +21,24 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElem
          * @return WebDriver
          */
         WebDriver setDriver();
+        By greencityLogo = By.xpath("//body//a[@class='small-screen-size']");
+        By signInButton = By.cssSelector("li.sign-up-link>div.create-button>span");
+        By newsButton = By.xpath("//a[@href='#/news']");
+        By tipsButton = By.xpath("//a[@href='#/tips']");
+        By placesButton = By.xpath("//a[@href='#/map']");
+        By aboutUsButton = By.xpath("//a[@href='#/about']");
+        By habitsButton = By.xpath("//div[@class='navigation-menu-left']//*[contains(text(),'My habits')]");
+        By endOfNews = By.xpath("//div[@class='wrapper']//*[contains(text(),'Unfotunately ')]");
+        By amountNews = By.xpath("//li[@class='gallery-view-li-active ng-star-inserted']");
+        By adsFilter = By.xpath("//li[contains(text(),'Ads')]");
+        By eventsFilter = By.xpath("//li[contains(text(),'Events')]");
+        By newsFilter = By.xpath("//li[contains(text(),'News')]");
+        By educationFilter = By.xpath("//li[contains(text(),'Education')]");
+        By initiativesFilter = By.xpath("//li[contains(text(),'Initiatives')]");
+        By lifehacksFilter = By.xpath("//li[contains(text(),'Lifehacks')]");
+        By homepageFilter = By.xpath("//li[contains(text(),'homepage')]");
+        By guysIMG = By.xpath("//div[@class='wrapper']//*[contains(text(),'Unfotunately ')]");
+
 
 
         default public WebElement searchElementByCss(By locator){
