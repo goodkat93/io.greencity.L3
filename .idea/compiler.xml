@@ -7,8 +7,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="io.github.greencity.L3" />
-        <module name="io.github.greencity.L3-main" />
-        <module name="io.greencity.L3" />
       </profile>
     </annotationProcessing>
   </component>
