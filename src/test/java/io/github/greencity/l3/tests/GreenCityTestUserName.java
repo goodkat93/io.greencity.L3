@@ -1,16 +1,9 @@
 package io.github.greencity.l3.tests;
 
-import io.github.greencity.l3.helpers.StaticDataProvider;
-import io.github.greencity.l3.pages.LoginPage;
 import io.github.greencity.l3.pages.MainPage;
 import io.github.greencity.l3.runner.Runner;
-import org.openqa.selenium.By;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import org.testng.reporters.jq.Main;
-
-import java.util.List;
 
 public class GreenCityTestUserName extends Runner{
 
@@ -55,15 +48,18 @@ public class GreenCityTestUserName extends Runner{
                 .open()
                 .clickNewsButton()
                 .toggleButtonAds()
+
                 .toggleButtonEvents()
+
+                .mainPageToggleOf()
                 .toggleButtonNews()
-                .toggleButtonEducation()
-                .toggleButtonIniatives()
-                .toggleButtonLifehacks()
-                .toggleButtonHomepage()
-                .clickNewsButton()
+                .scroldown()
                 .findItems()
-                .findUserData();
+                .findItemsCountShouldExit();
+
+        System.out.println(new MainPage(driver).getItemsCountRealyExist());
+        System.out.println(new MainPage(driver).getItemsCoutShouldExist());
+
 
     }
 
@@ -72,4 +68,3 @@ public class GreenCityTestUserName extends Runner{
 
 }
 
-    

@@ -5,13 +5,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-
-import java.util.concurrent.TimeUnit;
-
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 
 public class MainPage implements StableElementSearch {
@@ -26,7 +23,6 @@ public class MainPage implements StableElementSearch {
     By aboutUsButton = By.xpath("//a[@href='#/about']");
     By habitsButton = By.xpath("//div[@class='navigation-menu-left']//*[contains(text(),'My habits')]");
     By endOfNews = By.xpath("//div[@class='wrapper']//*[contains(text(),'Unfotunately ')]");
-    By amountNews = By.xpath("//li[@class='gallery-view-li-active ng-star-inserted']");
     By adsFilter = By.xpath("//li[contains(text(),'Ads')]");
     By eventsFilter = By.xpath("//li[contains(text(),'Events')]");
     By newsFilter = By.xpath("//li[contains(text(),'News')]");
@@ -35,6 +31,18 @@ public class MainPage implements StableElementSearch {
     By lifehacksFilter = By.xpath("//li[contains(text(),'Lifehacks')]");
     By homepageFilter = By.xpath("//li[contains(text(),'homepage')]");
     By guysIMG = By.xpath("//div[@class='wrapper']//*[contains(text(),'Unfotunately ')]");
+    By amountNews = By.xpath("//li[@class='gallery-view-li-active ng-star-inserted']");
+    By newsExittCount = By.xpath("//div[@class='main-wrapper']//*[contains(text(),'items found')]");
+    int itemsCoutShouldExist;
+    int itemsCountRealyExist;
+
+    public int getItemsCoutShouldExist() {
+        return itemsCoutShouldExist;
+    }
+
+    public int getItemsCountRealyExist() {
+        return itemsCountRealyExist;
+    }
 
     public MainPage(WebDriver driver) {
         this.driver = driver;
@@ -97,17 +105,26 @@ public class MainPage implements StableElementSearch {
         searchElementByXpath(adsFilter).click();
         return new MainPage(driver);
     }
+
     public MainPage toggleButtonEvents() {
 
         searchElementByXpath(eventsFilter).click();
+        new WebDriverWait(driver,20).until(ExpectedConditions.visibilityOfElementLocated(amountNews));
         int amount = searchElementsByXpath(amountNews).size();
         System.out.println(amount);
         searchElementByXpath(eventsFilter).click();
         return new MainPage(driver);
     }
 
+    public MainPage  mainPageToggleOf(){
+
+        new WebDriverWait(driver,20).until(ExpectedConditions.invisibilityOfElementLocated(amountNews ));
+        return this;
+    }
+
     public MainPage toggleButtonNews() {
         searchElementByXpath(newsFilter).click();
+        new WebDriverWait(driver,60).until(ExpectedConditions.visibilityOfElementLocated(amountNews));
         int amount = searchElementsByXpath(amountNews).size();
         System.out.println(amount);
         searchElementByXpath(newsFilter).click();
@@ -121,6 +138,7 @@ public class MainPage implements StableElementSearch {
         searchElementByXpath(educationFilter).click();
         return new MainPage(driver);
     }
+
     public MainPage toggleButtonIniatives() {
 
         searchElementByXpath(initiativesFilter).click();
@@ -147,32 +165,39 @@ public class MainPage implements StableElementSearch {
     }
 
 
+    public MainPage  findItemsCountShouldExit(){
+        System.out.println(driver.findElement(newsExittCount).getText());
+        String array[] = driver.findElement(newsExittCount).getText().split(" ");
+        System.out.println(Integer.parseInt(array[0]));
+        itemsCoutShouldExist =  Integer.parseInt(array[0]);
+        return this;
+    }
 
+    public MainPage  asserItems(){
+        Assert.assertEquals(itemsCountRealyExist,itemsCoutShouldExist);
+        return this;
+    }
+    public MainPage scroldown()
+    {
+        searchElementByXpath(greencityLogo).sendKeys(Keys.END);
+        searchElementsByXpath(guysIMG);
+        return this;
+    }
 
     public MainPage findItems() {
 
-        searchElementByXpath(greencityLogo).sendKeys(Keys.END);
-        searchElementsByXpath(guysIMG);
-        int items1 = searchElementsByXpath(amountNews).size();
-        String foundItems = driver.findElement(By.xpath
-                ("//div[@class='main-wrapper']//*[contains(text(),'items found')]")).getText();
-        String array[] = foundItems.split(" ");
-        int items2 = Integer.parseInt(array[0]);
-        try { Assert.assertEquals(items1, items2); // должен упасть
-            System.out.println("Количество фактических айтемов: " + items1 + " совпадает с указанными");
-        } catch (AssertionError e) {
-            System.out.println("Количество фактических айтемов: " + items2 + " не совпадает с указанными");
-        }
+        itemsCountRealyExist = searchElementsByXpath(amountNews).size();
         return new MainPage(driver);
     }
 
-    public MainPage findUserData() {
+        public MainPage findUserData() {
         int items1 = driver.findElements
                 (By.xpath("//li[@class='gallery-view-li-active ng-star-inserted']")).size();
         int dataUsers = driver.findElements
                 (By.xpath("//div[@class='user-data-added-news']")).size();
 
-        try { Assert.assertEquals(items1, dataUsers); // должен совпасть
+        try {
+            Assert.assertEquals(items1, dataUsers); // должен совпасть
             System.out.println("Количество датаюзеров: " + dataUsers + " совпадает с количеством новостей");
         } catch (AssertionError e) {
             System.out.println("Количество датаюзеров: " + dataUsers + " не совпадает с количеством новостей");
