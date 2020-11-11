@@ -1,11 +1,9 @@
 package io.github.greencity.l3.pages;
 
 import io.github.greencity.l3.helpers.StableElementSearch;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.interactions.Locatable;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -32,16 +30,21 @@ public class MainPage implements StableElementSearch {
     By homepageFilter = By.xpath("//li[contains(text(),'homepage')]");
     By guysIMG = By.xpath("//div[@class='wrapper']//*[contains(text(),'Unfotunately ')]");
     By amountNews = By.xpath("//li[@class='gallery-view-li-active ng-star-inserted']");
-    By newsExittCount = By.xpath("//div[@class='main-wrapper']//*[contains(text(),'items found')]");
-    int itemsCoutShouldExist;
-    int itemsCountRealyExist;
+    By newsExistCount = By.xpath("//div[@class='main-wrapper']//*[contains(text(),'items found')]");
+    By circleOfDownload = By.xpath("//mat-spinner"); //[@role='progressbar']
+    By appNoNews = By.xpath("//app-no-news");
+    By mainHeader = By.xpath("//h1[@class='main-header']");
+    By galleryViewButton = By.cssSelector("div.gallery-view");
+    By listViewButton = By.cssSelector("div.list-view");
+    int itemsCountShouldExist;
+    int itemsCountReallyExist;
 
-    public int getItemsCoutShouldExist() {
-        return itemsCoutShouldExist;
+    public int getItemsCountShouldExist() {
+        return itemsCountShouldExist;
     }
 
     public int getItemsCountRealyExist() {
-        return itemsCountRealyExist;
+        return itemsCountReallyExist;
     }
 
     public MainPage(WebDriver driver) {
@@ -60,7 +63,7 @@ public class MainPage implements StableElementSearch {
         return new LoginPage(driver);
     }
 
-    public MainPage clickNewsButton() {
+    public MainPage clickEcoNewsButton() {
         searchElementByXpath(newsButton)
                 .click();
         Assert.assertTrue(driver.getCurrentUrl()
@@ -99,6 +102,7 @@ public class MainPage implements StableElementSearch {
 
     public MainPage toggleButtonAds() {
         searchElementByXpath(adsFilter).click();
+        //new WebDriverWait(driver,10).until(ExpectedConditions.invisibilityOfElementLocated(circleOfDownload));
         searchElementsByXpath(amountNews).size();
         int amount = searchElementsByXpath(amountNews).size();
         System.out.println(amount);
@@ -109,26 +113,28 @@ public class MainPage implements StableElementSearch {
     public MainPage toggleButtonEvents() {
 
         searchElementByXpath(eventsFilter).click();
-        new WebDriverWait(driver,20).until(ExpectedConditions.visibilityOfElementLocated(amountNews));
+        //new WebDriverWait(driver,10).until(ExpectedConditions.invisibilityOfElementLocated(circleOfDownload));
+        searchElementsByXpath(amountNews).size();
         int amount = searchElementsByXpath(amountNews).size();
         System.out.println(amount);
-        searchElementByXpath(eventsFilter).click();
+
         return new MainPage(driver);
     }
 
-    public MainPage  mainPageToggleOf(){
-
-        new WebDriverWait(driver,20).until(ExpectedConditions.invisibilityOfElementLocated(amountNews ));
+    public MainPage eventsToggleOff() {
+        searchElementByXpath(eventsFilter).click();
+//      new WebDriverWait(driver,10).until(ExpectedConditions.invisibilityOfElementLocated(circleOfDownload));
         return this;
     }
 
     public MainPage toggleButtonNews() {
         searchElementByXpath(newsFilter).click();
-        new WebDriverWait(driver,60).until(ExpectedConditions.visibilityOfElementLocated(amountNews));
-        int amount = searchElementsByXpath(amountNews).size();
-        System.out.println(amount);
-        searchElementByXpath(newsFilter).click();
-        return new MainPage(driver);
+    return new MainPage(driver);
+    }
+
+    public MainPage newsToggleOff() {
+           searchElementByXpath(newsFilter).click();
+        return this;
     }
 
     public MainPage toggleButtonEducation() {
@@ -164,33 +170,40 @@ public class MainPage implements StableElementSearch {
         return new MainPage(driver);
     }
 
-
-    public MainPage  findItemsCountShouldExit(){
-        System.out.println(driver.findElement(newsExittCount).getText());
-        String array[] = driver.findElement(newsExittCount).getText().split(" ");
+    public MainPage findItemsCountShouldExist(){
+        System.out.println(driver.findElement(newsExistCount).getText());
+        String array[] = driver.findElement(newsExistCount).getText().split(" ");
         System.out.println(Integer.parseInt(array[0]));
-        itemsCoutShouldExist =  Integer.parseInt(array[0]);
+        itemsCountShouldExist =  Integer.parseInt(array[0]);
         return this;
     }
 
-    public MainPage  asserItems(){
-        Assert.assertEquals(itemsCountRealyExist,itemsCoutShouldExist);
+    public MainPage assertItems(){
+        Assert.assertEquals(itemsCountReallyExist, itemsCountShouldExist);
         return this;
     }
-    public MainPage scroldown()
-    {
-        searchElementByXpath(greencityLogo).sendKeys(Keys.END);
-        searchElementsByXpath(guysIMG);
+
+    public MainPage scrollDown() {
+
+        searchElementByXpath(greencityLogo).sendKeys(Keys.CONTROL, Keys.END);
+        searchElementByXpath(guysIMG);
+        return this;
+    }
+
+    public MainPage scrollUp() {
+        JavascriptExecutor js = (JavascriptExecutor)driver;
+        js.executeScript("scroll(2500, 0);");
         return this;
     }
 
     public MainPage findItems() {
-
-        itemsCountRealyExist = searchElementsByXpath(amountNews).size();
+        new WebDriverWait(driver,10).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(amountNews));
+        itemsCountReallyExist = searchElementsByXpath(amountNews).size();
+        System.out.println(itemsCountReallyExist);
         return new MainPage(driver);
     }
 
-        public MainPage findUserData() {
+    public MainPage findUserData() {
         int items1 = driver.findElements
                 (By.xpath("//li[@class='gallery-view-li-active ng-star-inserted']")).size();
         int dataUsers = driver.findElements
@@ -203,6 +216,15 @@ public class MainPage implements StableElementSearch {
             System.out.println("Количество датаюзеров: " + dataUsers + " не совпадает с количеством новостей");
         }
         return new MainPage(driver);
+    }
+
+    public MainPage switchtoGalleryView(){
+        searchElementByCss(galleryViewButton).click();
+        return this;
+    }
+    public MainPage switchToListView(){
+        searchElementByCss(listViewButton).click();
+        return this;
     }
 
     @Override

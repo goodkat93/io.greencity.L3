@@ -21,12 +21,14 @@ public class Runner {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         actions = new Actions(driver);
-        String pageSource = driver.getPageSource();
+
 
 
     }
 
-    @AfterTest
-    protected void tearDown() {driver.quit();}
+ @AfterTest
+    protected void shutDown(){
+        driver.quit();
+ }
 
 }

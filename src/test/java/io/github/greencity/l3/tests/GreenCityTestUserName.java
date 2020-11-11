@@ -2,6 +2,7 @@ package io.github.greencity.l3.tests;
 
 import io.github.greencity.l3.pages.MainPage;
 import io.github.greencity.l3.runner.Runner;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -42,29 +43,67 @@ public class GreenCityTestUserName extends Runner{
 */
 
 
+//    @Test
+//    public void testItems() {
+//        new MainPage(driver)
+//                .open()
+//                .clickEcoNewsButton()
+//                .toggleButtonNews()
+//                .newsToggleOff()
+//                .scrolldown()
+//                .findItems()
+//                .findItemsCountShouldExit();
+//    }
+
     @Test
-    public void testItems() throws Exception {
+    public void testToggleButtonAds() {
         new MainPage(driver)
                 .open()
-                .clickNewsButton()
-                .toggleButtonAds()
+                .clickEcoNewsButton()
+                .toggleButtonAds();
+    }
 
+    @Test
+    public void testToggleButtonEvents(){
+        new MainPage(driver)
+                .open()
+                .clickEcoNewsButton()
                 .toggleButtonEvents()
+                .eventsToggleOff();
+    }
 
-                .mainPageToggleOf()
+    @Test
+    public void testToggleButtonNews(){
+        new MainPage(driver)
+                .open()
+                .clickEcoNewsButton()
                 .toggleButtonNews()
-                .scroldown()
+                .scrollDown()
                 .findItems()
-                .findItemsCountShouldExit();
-
-        System.out.println(new MainPage(driver).getItemsCountRealyExist());
-        System.out.println(new MainPage(driver).getItemsCoutShouldExist());
-
+                .scrollUp()
+                .newsToggleOff();
 
     }
 
+    @Test
+    public void scrollTesting(){
+        new MainPage(driver)
+                .open()
+                .clickEcoNewsButton()
+                .scrollDown()
+                .findItems();
+    }
 
+    @Test
+    public void listViewTesting(){
+        new MainPage(driver)
+                .open()
+                .clickEcoNewsButton()
+                .switchToListView()
+                .scrollDown();
+        Assert.assertTrue(driver.findElement(By.cssSelector("app-news-list-list-view")).isDisplayed());
 
+    }
 
 }
 
