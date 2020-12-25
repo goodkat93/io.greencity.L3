@@ -1,20 +1,17 @@
 package io.github.greencity.l3.tests;
 
 import io.github.greencity.l3.helpers.StaticDataProvider;
-import io.github.greencity.l3.pages.LoginPage;
 import io.github.greencity.l3.pages.MainPage;
 import io.github.greencity.l3.runner.Runner;
 import org.openqa.selenium.By;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import org.testng.reporters.jq.Main;
 
 import java.util.List;
 
 public class GreenCityTestUserName extends Runner{
 
-/*    @Test(groups = {"SmokeSingUp"},dataProvider = "usernameDataProvider",dataProviderClass = StaticDataProvider.class )
+   @Test(groups = {"SmokeSingUp"},dataProvider = "usernameDataProvider",dataProviderClass = StaticDataProvider.class )
     public void TestUsername(String username, String errorMsg) {
         new MainPage(driver)
                 .open()
@@ -46,30 +43,68 @@ public class GreenCityTestUserName extends Runner{
                 .clickPlacesButton()
                 .clickAboutUsButton();
         }
-*/
+
 
 
     @Test
-    public void testItems() throws Exception {
+    public void testItems() {
         new MainPage(driver)
                 .open()
-                .clickNewsButton()
-                .toggleButtonAds()
-                .toggleButtonEvents()
-                .toggleButtonNews()
-                .toggleButtonEducation()
-                .toggleButtonIniatives()
-                .toggleButtonLifehacks()
-                .toggleButtonHomepage()
-                .clickNewsButton()
+                .clickEcoNewsButton()
+                .scrollDown()
                 .findItems()
-                .findUserData();
+                .findItemsCountShouldExist();
+    }
+
+    @Test
+    public void testToggleButtonAds() {
+        new MainPage(driver)
+                .open()
+                .clickEcoNewsButton()
+                .toggleButtonAds();
+    }
+
+    @Test
+    public void testToggleButtonEvents(){
+        new MainPage(driver)
+                .open()
+                .clickEcoNewsButton()
+                .toggleButtonEvents()
+                .eventsToggleOff();
+    }
+
+    @Test
+    public void testToggleButtonNews(){
+        new MainPage(driver)
+                .open()
+                .clickEcoNewsButton()
+                .toggleButtonNews()
+                .scrollDown()
+                .findItems()
+                .scrollUp()
+                .newsToggleOff();
 
     }
 
+    @Test
+    public void scrollTesting(){
+        new MainPage(driver)
+                .open()
+                .clickEcoNewsButton()
+                .scrollDown()
+                .findItems();
+    }
 
+    @Test
+    public void listViewTesting(){
+        new MainPage(driver)
+                .open()
+                .clickEcoNewsButton()
+                .switchToListView()
+                .scrollDown();
+        Assert.assertTrue(driver.findElement(By.cssSelector("app-news-list-list-view")).isDisplayed());
 
+    }
 
 }
 
-    

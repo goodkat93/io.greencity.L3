@@ -1,0 +1,19 @@
+<changelist name="Uncommitted_changes_before_Checkout_at_25_12_2020_12_20_[Default_Changelist]" date="1608880896072" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25_12_2020_12_20_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 25.12.2020 12:20 [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="target/test-classes/io/github/greencity/l3/runner/Runner.class" />
+    <option name="AFTER_PATH" value="target/test-classes/io/github/greencity/l3/runner/Runner.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25_12_2020_12_20_[Default_Changelist]/Runner.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/test-classes/io/github/greencity/l3/tests/GreenCityTestUserName.class" />
+    <option name="AFTER_PATH" value="target/test-classes/io/github/greencity/l3/tests/GreenCityTestUserName.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25_12_2020_12_20_[Default_Changelist]/GreenCityTestUserName.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/test-classes/io/github/greencity/l3/pages/MainPage.class" />
+    <option name="AFTER_PATH" value="target/test-classes/io/github/greencity/l3/pages/MainPage.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25_12_2020_12_20_[Default_Changelist]/MainPage.class" />
+  </binary>
+</changelist>
