@@ -19,9 +19,9 @@ public class StaticDataProvider {
         };
     }
 
-    @BeforeGroups(value = {"LesonExample"})
-    @DataProvider(name = "LesonExampleDataprovider")
-    public Object[][] LesonExampleDataprovider() {
+    @BeforeGroups(value = {"LessonExample"})
+    @DataProvider(name = "LessonExampleDataProvider")
+    public Object[][] LessonExampleDataProvider() {
         return new Object[][]{
                 {"greencityp" + getRandom(), "asd",
 
@@ -48,7 +48,7 @@ public class StaticDataProvider {
     @BeforeGroups(value = {"HomeWork"})
     @DataProvider(name = "HomeWorkDataProvider")
 
-    public Object[][] HomeWorkDataProvider(){
+    public Object[][] HomeWorkDataProvider() {
         return new Object[][]{
                 {"https://ita-social-projects.github.io/GreenCityClient/#/news"},
                 {"https://ita-social-projects.github.io/GreenCityClient/#/tips"},

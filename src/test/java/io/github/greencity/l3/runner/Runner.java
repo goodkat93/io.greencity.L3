@@ -27,6 +27,8 @@ public class Runner {
     }
 
     @AfterTest
-    protected void tearDown() {driver.quit();}
+    protected void tearDown() {
+        driver.quit();
+    }
 
 }

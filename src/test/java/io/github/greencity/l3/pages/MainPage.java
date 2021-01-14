@@ -7,10 +7,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import java.security.Key;
-import java.util.concurrent.TimeUnit;
-
-
 public class MainPage implements StableElementSearch {
     WebDriver driver;
     Actions actions;
@@ -133,11 +129,11 @@ public class MainPage implements StableElementSearch {
 
     public MainPage toggleButtonNews() {
         searchElementByXpath(newsFilter).click();
-    return new MainPage(driver);
+        return new MainPage(driver);
     }
 
     public MainPage newsToggleOff() {
-           searchElementByXpath(newsFilter).click();
+        searchElementByXpath(newsFilter).click();
         return this;
     }
 
@@ -174,34 +170,34 @@ public class MainPage implements StableElementSearch {
         return new MainPage(driver);
     }
 
-    public MainPage findItemsCountShouldExist(){
+    public MainPage findItemsCountShouldExist() {
         System.out.println(driver.findElement(newsExistCount).getText());
         String array[] = driver.findElement(newsExistCount).getText().split(" ");
         System.out.println(Integer.parseInt(array[0]));
-        itemsCountShouldExist =  Integer.parseInt(array[0]);
+        itemsCountShouldExist = Integer.parseInt(array[0]);
         return this;
     }
 
-    public MainPage assertItems(){
+    public MainPage assertItems() {
         Assert.assertEquals(itemsCountReallyExist, itemsCountShouldExist);
         return this;
     }
 
     public MainPage scrollDown() {
-        
+
         searchElementByCss(body).sendKeys(Keys.CONTROL, Keys.END);
         searchElementByXpath(appNoData);
         return this;
     }
 
     public MainPage scrollUp() {
-        JavascriptExecutor js = (JavascriptExecutor)driver;
+        JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("scroll(2500, 0);");
         return this;
     }
 
     public MainPage findItems() {
-        new WebDriverWait(driver,10).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(amountNews));
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(amountNews));
         itemsCountReallyExist = searchElementsByXpath(amountNews).size();
         System.out.println(itemsCountReallyExist);
         return new MainPage(driver);
@@ -222,11 +218,12 @@ public class MainPage implements StableElementSearch {
         return new MainPage(driver);
     }
 
-    public MainPage switchtoGalleryView(){
+    public MainPage switchtoGalleryView() {
         searchElementByCss(galleryViewButton).click();
         return this;
     }
-    public MainPage switchToListView(){
+
+    public MainPage switchToListView() {
         searchElementByCss(listViewButton).click();
         return this;
     }

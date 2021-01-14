@@ -15,15 +15,17 @@ public class LoginPage implements StableElementSearch {
     By signInButton = By.cssSelector("li.sign-up-link>div.create-button>span");
 
     WebDriver driver;
-    public LoginPage(WebDriver driver) { this.driver = driver; }
 
+    public LoginPage(WebDriver driver) {
+        this.driver = driver;
+    }
 
 
     public LoginPage setEmail(String email) {
-
         searchElementByXpath("//input[@formcontrolname='email']").sendKeys(email);
         return this;
     }
+
     public LoginPage testEmail() {
         searchElementByCss("div.error-message>app-error>div");
         String pageSource = driver.getPageSource();
@@ -32,7 +34,7 @@ public class LoginPage implements StableElementSearch {
         return this;
     }
 
-    public LoginPage clickSignUp(){
+    public LoginPage clickSignUp() {
         driver.findElement(signInButton)
                 .click();
         return new LoginPage(driver);
@@ -44,6 +46,7 @@ public class LoginPage implements StableElementSearch {
         searchElementByXpath("//input[@formcontrolname='email']").click();
         return this;
     }
+
 
     @Override
     public WebDriver setDriver() {

@@ -9,9 +9,9 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class GreenCityTestUserName extends Runner{
+public class GreenCityTestUserName extends Runner {
 
-   @Test(groups = {"SmokeSingUp"},dataProvider = "usernameDataProvider",dataProviderClass = StaticDataProvider.class )
+    @Test(groups = {"SmokeSingUp"}, dataProvider = "usernameDataProvider", dataProviderClass = StaticDataProvider.class)
     public void TestUsername(String username, String errorMsg) {
         new MainPage(driver)
                 .open()
@@ -20,30 +20,29 @@ public class GreenCityTestUserName extends Runner{
         Assert.assertEquals(driver.findElement(By.cssSelector("app-error>div")).getText(), errorMsg);
     }
 
-    @Test(groups = {"LesonExample"},dataProvider = "LesonExampleDataprovider",dataProviderClass = StaticDataProvider.class )
-    public void Example(String email, String userName,  List<String> errorMsgs) {
+    @Test(groups = {"LessonExample"}, dataProvider = "LessonExampleDataProvider", dataProviderClass = StaticDataProvider.class)
+    public void Example(String email, String userName, List<String> errorMsgs) {
         new MainPage(driver)
                 .open()
                 .clickSignUp()
                 .setEmail(email)
                 .setUserName(userName);
         Assert.assertTrue(driver.findElements(By.cssSelector("app-error>div"))
-                        .get(0).getText().trim().replaceAll("\\s+", "").contains(errorMsgs.get(0)));
+                .get(0).getText().trim().replaceAll("\\s+", "").contains(errorMsgs.get(0)));
         Assert.assertTrue(driver.findElements(By.cssSelector("app-error>div"))
-                        .get(1).getText().trim().replaceAll("\\s+", "").contains(errorMsgs.get(1)));
+                .get(1).getText().trim().replaceAll("\\s+", "").contains(errorMsgs.get(1)));
     }
 
     @Test
-    public void MainPageSelectors(){
+    public void MainPageSelectors() {
 
         new MainPage(driver)
                 .open()
-                .clickNewsButton()
+                .clickEcoNewsButton()
                 .clickTipsButton()
                 .clickPlacesButton()
                 .clickAboutUsButton();
-        }
-
+    }
 
 
     @Test
@@ -65,7 +64,7 @@ public class GreenCityTestUserName extends Runner{
     }
 
     @Test
-    public void testToggleButtonEvents(){
+    public void testToggleButtonEvents() {
         new MainPage(driver)
                 .open()
                 .clickEcoNewsButton()
@@ -74,7 +73,7 @@ public class GreenCityTestUserName extends Runner{
     }
 
     @Test
-    public void testToggleButtonNews(){
+    public void testToggleButtonNews() {
         new MainPage(driver)
                 .open()
                 .clickEcoNewsButton()
@@ -83,11 +82,10 @@ public class GreenCityTestUserName extends Runner{
                 .findItems()
                 .scrollUp()
                 .newsToggleOff();
-
     }
 
     @Test
-    public void scrollTesting(){
+    public void scrollTesting() {
         new MainPage(driver)
                 .open()
                 .clickEcoNewsButton()
@@ -96,7 +94,7 @@ public class GreenCityTestUserName extends Runner{
     }
 
     @Test
-    public void listViewTesting(){
+    public void listViewTesting() {
         new MainPage(driver)
                 .open()
                 .clickEcoNewsButton()
